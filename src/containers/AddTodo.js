@@ -24,7 +24,7 @@ class AddTodo extends React.Component {
       return
     }
 
-    this.props.addTodo(this.state.text, Math.floor(Math.random() * 10000))
+    this.props.addTodo(this.state.text)
     this.setState({ text: '' })
   }
 
@@ -46,7 +46,7 @@ AddTodo.propTypes = {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addTodo: (text, id) => dispatch(addTodo(text, id))
+    addTodo: text => dispatch(addTodo(text))
   }
 }
 

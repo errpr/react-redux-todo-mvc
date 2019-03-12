@@ -5,7 +5,7 @@ import App from './components/App'
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import visibilityFilter from './store/filterDuck'
-import todos from './store/todosDuck'
+import todos, { idReducer as nextId } from './store/todosDuck'
 import { Provider } from 'react-redux'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -13,7 +13,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
   combineReducers({
     visibilityFilter,
-    todos
+    todos,
+    nextId
   }),
   undefined,
   composeEnhancers(applyMiddleware(thunk))
