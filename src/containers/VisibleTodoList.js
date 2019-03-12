@@ -18,7 +18,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTodoClick: index => dispatch(toggleTodo(index))
+    onTodoClick: id => dispatch(toggleTodo(id))
   }
 }
 

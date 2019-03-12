@@ -4,6 +4,24 @@ const REMOVE_TODO = 'REMOVE_TODO'
 const TOGGLE_TODO = 'TOGGLE_TODO'
 
 // Reducers
+const todoReducer = (state, action) => {
+  const { payload } = action
+  if (payload.id !== state.id) {
+    return state
+  }
+  switch (action.type) {
+    case REMOVE_TODO:
+      return
+    case TOGGLE_TODO:
+      return {
+        ...state,
+        completed: !state.completed
+      }
+    default:
+      return state
+  }
+}
+
 const todosReducer = (state = [], action) => {
   const { payload } = action
   switch (action.type) {
@@ -12,45 +30,39 @@ const todosReducer = (state = [], action) => {
         ...state,
         {
           text: payload.text,
+          id: payload.id,
           completed: false
         }
       ]
     case REMOVE_TODO:
-      return state.filter((todo, index) => index !== payload.index)
+      return state.filter(todo => todoReducer(todo, action))
     case TOGGLE_TODO:
-      return state.map((todo, index) => {
-        if (index === payload.index) {
-          return {
-            ...todo,
-            completed: !todo.completed
-          }
-        }
-        return todo
-      })
+      return state.map(todo => todoReducer(todo, action))
     default:
       return state
   }
 }
 
 // Action Creators
-export const addTodo = text => ({
+export const addTodo = (text, id) => ({
   type: ADD_TODO,
   payload: {
-    text
+    text,
+    id
   }
 })
 
-export const removeTodo = index => ({
+export const removeTodo = id => ({
   type: REMOVE_TODO,
   payload: {
-    index
+    id
   }
 })
 
-export const toggleTodo = index => ({
+export const toggleTodo = id => ({
   type: TOGGLE_TODO,
   payload: {
-    index
+    id
   }
 })
 

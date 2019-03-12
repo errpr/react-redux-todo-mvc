@@ -7,7 +7,7 @@ const StyledTodoList = styled.ul``
 
 const TodoList = ({ todos, onTodoClick }) => {
   const todoItems = todos.map((todo, index) => (
-    <Todo key={index} {...todo} onClick={() => onTodoClick(index)} />
+    <Todo key={index} {...todo} onClick={() => onTodoClick(todo.id)} />
   ))
 
   return <StyledTodoList>{todoItems}</StyledTodoList>
