@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addTodo } from '../store/todosDuck'
+import PropTypes from 'prop-types'
 
 class AddTodo extends React.Component {
   constructor (props) {
@@ -37,6 +38,10 @@ class AddTodo extends React.Component {
       </div>
     )
   }
+}
+
+AddTodo.propTypes = {
+  addTodo: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = dispatch => {
